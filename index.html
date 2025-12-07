@@ -223,7 +223,7 @@
             display: flex;
             justify-content: center;
             gap: 25px;
-            margin-bottom: 40px; /* 增加間距 */
+            margin-bottom: 40px; 
         }
         .icon-btn {
             width: 55px;
@@ -246,13 +246,11 @@
             border-top: 1px dashed var(--accent-color);
             padding-top: 40px;
             width: 100%;
-            /* 讓內容完全置中 */
             text-align: center; 
         }
 
-        /* 資訊列：垂直堆疊設計 */
         .info-row {
-            margin-bottom: 35px; /* 每個項目之間的距離 */
+            margin-bottom: 35px;
         }
         
         .info-icon {
@@ -262,8 +260,9 @@
             display: inline-block;
         }
 
+        /* 調整區：標題放大、內文縮小 */
         .info-content div {
-            font-size: 0.8rem;
+            font-size: 1.1rem; /* 標題放大 */
             color: var(--secondary-text);
             margin-bottom: 5px;
             font-weight: bold;
@@ -271,7 +270,7 @@
             text-transform: uppercase;
         }
         .info-content span, .info-content a {
-            font-size: 1.1rem;
+            font-size: 0.95rem; /* 內文縮小 */
             color: var(--primary-text);
             display: block;
             line-height: 1.6;

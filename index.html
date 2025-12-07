@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>i Love Balloon | 預約佈置</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- 1. 奶茶色系變數設定 --- */
+        :root {
+            --bg-color: #F9F7F5;       /* 極淺奶茶底色 */
+            --nav-bg: #FFFFFF;         /* 純白導航 */
+            --card-bg: #FFFFFF;        /* 卡片白底 */
+            --primary-text: #6B5B52;   /* 深可可色 */
+            --secondary-text: #96867D; /* 淺棕灰 */
+            --accent-color: #DBCAB8;   /* 裝飾線條色 */
+            --btn-color: #BCAAA4;      /* 莫蘭迪奶茶按鈕 */
+            --btn-hover: #A1887F;      /* 按鈕加深 */
+            --shadow: 0 8px 30px rgba(107, 91, 82, 0.08); /* 柔和陰影 */
+            
+            /* 品牌顏色 */
+            --line-color: #06C755;
+            --fb-color: #1877F2;
+            --ig-gradient: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        }
+
+        /* --- 2. 基礎設定 --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--primary-text);
+            line-height: 1.7;
+            padding-top: 80px;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* --- 3. 固定導航列 --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background-color: var(--nav-bg);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.03);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 8%;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-text);
+            letter-spacing: 1px;
+        }
+
+        nav ul { display: flex; gap: 35px; }
+        nav a {
+            font-size: 0.95rem;
+            color: var(--secondary-text);
+            font-weight: 500;
+        }
+        nav a:hover { color: var(--btn-hover); }
+
+        @media (max-width: 768px) {
+            header { padding: 0 20px; }
+            nav ul { gap: 15px; }
+            nav a { font-size: 0.85rem; }
+        }
+
+        /* --- 4. 版面容器 --- */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        section {
+            margin-bottom: 100px;
+            scroll-margin-top: 100px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: var(--primary-text);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-title::after {
+            content: '';
+            width: 40px;
+            height: 3px;
+            background-color: var(--accent-color);
+            border-radius: 5px;
+        }
+
+        /* --- 5. 通用卡片 --- */
+        .card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255,255,255,0.8);
+        }
+
+        /* --- 6. 價目表 --- */
+        .price-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .price-card {
+            background: #FFFFFF;
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .price-card:hover { transform: translateY(-5px); }
+        .price-card.featured::before {
+            content: "熱門";
+            position: absolute;
+            top: 15px;
+            right: -30px;
+            background: var(--btn-color);
+            color: #fff;
+            width: 100px;
+            padding: 5px 0;
+            transform: rotate(45deg);
+            font-size: 0.8rem;
+        }
+        .price-card h3 { font-size: 1.2rem; margin-bottom: 10px; color: var(--primary-text); }
+        .price-tag { display: block; font-size: 1.6rem; color: var(--btn-hover); font-weight: bold; margin-bottom: 15px; }
+        .price-desc { font-size: 0.9rem; color: var(--secondary-text); margin-bottom: 25px; min-height: 45px; }
+        .btn {
+            display: inline-block;
+            background-color: var(--btn-color);
+            color: #fff;
+            padding: 10px 30px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+        .btn:hover { background-color: var(--btn-hover); }
+
+        /* --- 7. 預約須知 --- */
+        .rules-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 15px;
+            color: var(--secondary-text);
+        }
+        .rules-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--btn-color);
+            font-weight: bold;
+        }
+        .rules-list strong { color: var(--primary-text); margin-right: 5px; }
+
+        /* --- 8. 品牌介紹 --- */
+        .about-layout { display: flex; align-items: center; gap: 40px; }
+        .about-image {
+            flex: 1;
+            height: 300px;
+            background-color: #EDE7E3;
+            border-radius: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #BCAAA4;
+            font-size: 1.2rem;
+            position: relative;
+        }
+        .about-image::after {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: -15px;
+            bottom: -15px;
+            border: 2px solid var(--accent-color);
+            border-radius: 16px;
+            z-index: -1;
+        }
+        .about-text { flex: 1.2; }
+        .about-text h3 { font-size: 1.4rem; margin-bottom: 20px; color: var(--primary-text); }
+        .about-text p { margin-bottom: 15px; color: var(--secondary-text); text-align: justify; }
+        @media (max-width: 768px) {
+            .about-layout { flex-direction: column; }
+            .about-image { width: 100%; height: 200px; margin-bottom: 20px; }
+            .about-image::after { display: none; }
+        }
+
+        /* --- 9. 聯絡方式 (置中對齊版) --- */
+        .contact-card { text-align: center; }
+        
+        /* 社群 Icon 區塊 */
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 40px; /* 增加間距 */
+        }
+        .icon-btn {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background-color: #F0EAE6;
+            color: var(--primary-text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            transition: all 0.3s ease;
+        }
+        .icon-btn.line:hover { background-color: var(--line-color); color: white; transform: translateY(-5px); }
+        .icon-btn.fb:hover { background-color: var(--fb-color); color: white; transform: translateY(-5px); }
+        .icon-btn.ig:hover { background: var(--ig-gradient); color: white; transform: translateY(-5px); }
+
+        /* 門市資訊整合區塊 */
+        .store-info-box {
+            border-top: 1px dashed var(--accent-color);
+            padding-top: 40px;
+            width: 100%;
+            /* 讓內容完全置中 */
+            text-align: center; 
+        }
+
+        /* 資訊列：垂直堆疊設計 */
+        .info-row {
+            margin-bottom: 35px; /* 每個項目之間的距離 */
+        }
+        
+        .info-icon {
+            font-size: 1.6rem;
+            color: var(--btn-color);
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .info-content div {
+            font-size: 0.8rem;
+            color: var(--secondary-text);
+            margin-bottom: 5px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .info-content span, .info-content a {
+            font-size: 1.1rem;
+            color: var(--primary-text);
+            display: block;
+            line-height: 1.6;
+        }
+        
+        .info-content a:hover { color: var(--btn-hover); text-decoration: underline; }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 0.8rem;
+            color: #B0B0B0;
+            border-top: 1px solid #EEE;
+            background: #FFFFFF;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">i Love Balloon</div>
+        <nav>
+            <ul>
+                <li><a href="#price">價目</a></li>
+                <li><a href="#rules">須知</a></li>
+                <li><a href="#about">品牌</a></li>
+                <li><a href="#contact">聯絡</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        
+        <section id="price">
+            <h2 class="section-title">服務方案</h2>
+            <div class="price-grid">
+                <div class="price-card">
+                    <h3>輕佈置方案</h3>
+                    <span class="price-tag">NT$ 4,500 起</span>
+                    <p class="price-desc">適合生日派對、居家慶祝。<br>含氣球串、桌上擺飾。</p>
+                    <a href="#contact" class="btn">預約</a>
+                </div>
+                <div class="price-card featured">
+                    <h3>精緻主題佈置</h3>
+                    <span class="price-tag">NT$ 8,800 起</span>
+                    <p class="price-desc">適合求婚、寶寶抓周。<br>含背景牆、燈光與氣球拱門。</p>
+                    <a href="#contact" class="btn">預約</a>
+                </div>
+                <div class="price-card">
+                    <h3>全場客製化</h3>
+                    <span class="price-tag">專人報價</span>
+                    <p class="price-desc">適合婚禮、大型活動。<br>依場地進行整體視覺規劃。</p>
+                    <a href="#contact" class="btn">諮詢</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="rules">
+            <h2 class="section-title">預約須知</h2>
+            <div class="card">
+                <ul class="rules-list">
+                    <li><strong>預約時間</strong>：請至少提前 14 天預約，以保留檔期與製作時間。</li>
+                    <li><strong>訂金規範</strong>：確認檔期後需支付 30% 訂金，餘款活動當日結清。</li>
+                    <li><strong>改期政策</strong>：如需改期請於 7 天前告知，訂金可保留延期一次。</li>
+                    <li><strong>車馬費與低消</strong>：依距離遠近將有不同低消及車馬費。</li>
+                    <li><strong>氣球時效</strong>：氣球商品因有時效性，皆限當天使用。</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="about">
+            <h2 class="section-title">關於我們</h2>
+            <div class="card about-layout">
+                <div class="about-image">
+                    IMAGE
+                </div>
+                <div class="about-text">
+                    <h3>i Love Balloon</h3>
+                    <p>為生活增添溫柔的儀式感。我們專注於使用質感色系與創意氣球設計，打造耐看且充滿驚喜的視覺空間。</p>
+                    <p>無論是孩子的週歲派對、浪漫求婚，還是親友相聚的重要時刻，我們都將用最細膩的心思，為您編織一段難忘的回憶。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2 class="section-title">聯絡我們</h2>
+            <div class="card contact-card">
+                <p style="margin-bottom: 25px; color: var(--secondary-text);">歡迎透過社群平台聯繫我們</p>
+
+                <div class="social-icons">
+                    <a href="https://line.me/ti/p/@ilove79" target="_blank" class="icon-btn line" title="Line">
+                        <i class="fa-brands fa-line"></i>
+                    </a>
+                    <a href="https://www.instagram.com/ilove.balloon/" target="_blank" class="icon-btn ig" title="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="https://www.facebook.com/ilove037683756" target="_blank" class="icon-btn fb" title="Facebook">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                </div>
+
+                <div class="store-info-box">
+                    
+                    <div class="info-row">
+                        <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+                        <div class="info-content">
+                            <div>門市位置 Location</div>
+                            <a href="https://www.google.com/maps/search/?api=1&query=苗栗縣頭份市中山路214-1號" target="_blank">
+                                苗栗縣頭份市中山路214-1號
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="info-row">
+                        <div class="info-icon"><i class="fa-regular fa-clock"></i></div>
+                        <div class="info-content">
+                            <div>營業時間 Business Hours</div>
+                            <span>周一至周六 10:00 ~ 20:00</span>
+                            <span>周日 10:00 ~ 18:00</span>
+                        </div>
+                    </div>
+
+                    <div class="info-row" style="margin-bottom: 0;">
+                        <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
+                        <div class="info-content">
+                            <div>聯絡電話 Phone</div>
+                            <span>037-683756</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        © 2025 i Love Balloon. All Rights Reserved.
+    </footer>
+
+</body>
+</html>

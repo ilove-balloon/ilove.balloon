@@ -247,16 +247,15 @@
         }
         .rules-list strong { color: var(--primary-text); margin-right: 5px; }
 
-        /* --- 8. 品牌介紹 (無圖片版) --- */
+        /* --- 8. 品牌介紹 (純文字) --- */
         .about-layout {
-            /* 移除 Flex 讓文字自然流動 */
             text-align: center;
-            padding: 60px 40px; /* 增加留白，質感更好 */
+            padding: 60px 40px;
         }
 
         .about-text {
             max-width: 800px;
-            margin: 0 auto; /* 置中 */
+            margin: 0 auto;
         }
         
         .about-text h3 {
@@ -273,14 +272,16 @@
             line-height: 1.9;
         }
 
-        /* --- 9. 聯絡方式 --- */
+        /* --- 9. 聯絡方式 (卡片+長條式設計) --- */
         .contact-card { text-align: center; }
+        
         .social-icons {
             display: flex;
             justify-content: center;
             gap: 25px;
             margin-bottom: 40px; 
         }
+        
         .icon-btn {
             width: 55px;
             height: 55px;
@@ -297,41 +298,98 @@
         .icon-btn.fb:hover { background-color: var(--fb-color); color: white; transform: translateY(-5px); }
         .icon-btn.ig:hover { background: var(--ig-gradient); color: white; transform: translateY(-5px); }
 
-        .store-info-box {
-            border-top: 1px dashed var(--accent-color);
-            padding-top: 40px;
-            width: 100%;
-            text-align: center; 
+        /* 資訊列表容器 */
+        .contact-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* 卡片間距 */
+            max-width: 700px; /* 限制寬度讓它不至於太寬 */
+            margin: 0 auto;
         }
-        .info-row { margin-bottom: 35px; }
-        .info-icon {
-            font-size: 1.6rem;
+
+        /* 長條卡片樣式 */
+        .contact-strip {
+            background: #FFFFFF;
+            border-radius: 12px;
+            padding: 20px 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            border: 1px solid transparent; /* 預留邊框 */
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            text-align: left; /* 文字靠左 */
+            transition: all 0.3s ease;
+        }
+
+        .contact-strip:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            border-color: #F0EAE6;
+        }
+
+        /* 左側圓形 Icon */
+        .contact-icon-box {
+            width: 50px;
+            height: 50px;
+            background: #F9F7F5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: var(--btn-color);
-            margin-bottom: 8px;
-            display: inline-block;
+            font-size: 1.2rem;
+            flex-shrink: 0; /* 防止被擠壓 */
         }
-        .info-content .title-zh {
-            font-size: 1.15rem;
-            color: var(--secondary-text);
+
+        /* 右側文字群組 */
+        .contact-text-group {
+            flex: 1;
+        }
+
+        .title-zh {
+            font-size: 1.1rem;
+            color: var(--primary-text);
             font-weight: bold;
             display: block;
-            line-height: 1.4;
         }
-        .info-content .title-en {
+        
+        .title-en {
             font-size: 0.75rem;
             color: #B0A098;
             display: block;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
         }
-        .info-content span, .info-content a {
-            font-size: 0.95rem; 
-            color: var(--primary-text);
+
+        .contact-content {
+            font-size: 1rem;
+            color: var(--secondary-text);
             display: block;
-            line-height: 1.6;
+            line-height: 1.5;
         }
-        .info-content a:hover { color: var(--btn-hover); text-decoration: underline; }
+        
+        /* 連結特效 */
+        a.contact-content:hover {
+            color: var(--btn-hover);
+            text-decoration: underline;
+        }
+
+        /* 手機版適配 */
+        @media (max-width: 500px) {
+            .contact-strip {
+                padding: 20px;
+                gap: 15px;
+            }
+            .contact-icon-box {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            .title-zh { font-size: 1rem; }
+            .contact-content { font-size: 0.9rem; }
+        }
+
 
         /* --- Footer --- */
         footer {
@@ -520,35 +578,41 @@
                     </a>
                 </div>
 
-                <div class="store-info-box">
+                <div class="contact-list">
                     
-                    <div class="info-row">
-                        <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
-                        <div class="info-content">
+                    <div class="contact-strip">
+                        <div class="contact-icon-box">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <div class="contact-text-group">
                             <span class="title-zh">門市位置</span>
                             <span class="title-en">Location</span>
-                            <a href="https://www.google.com/maps/search/?api=1&query=苗栗縣頭份市中山路214-1號" target="_blank">
+                            <a href="https://www.google.com/maps/search/?api=1&query=苗栗縣頭份市中山路214-1號" target="_blank" class="contact-content">
                                 苗栗縣頭份市中山路214-1號
                             </a>
                         </div>
                     </div>
                     
-                    <div class="info-row">
-                        <div class="info-icon"><i class="fa-regular fa-clock"></i></div>
-                        <div class="info-content">
+                    <div class="contact-strip">
+                        <div class="contact-icon-box">
+                            <i class="fa-regular fa-clock"></i>
+                        </div>
+                        <div class="contact-text-group">
                             <span class="title-zh">營業時間</span>
                             <span class="title-en">Business Hours</span>
-                            <span>周一至周六 10:00 ~ 20:00</span>
-                            <span>周日 10:00 ~ 18:00</span>
+                            <span class="contact-content">周一至周六 10:00 ~ 20:00</span>
+                            <span class="contact-content">周日 10:00 ~ 18:00</span>
                         </div>
                     </div>
 
-                    <div class="info-row" style="margin-bottom: 0;">
-                        <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
-                        <div class="info-content">
+                    <div class="contact-strip">
+                        <div class="contact-icon-box">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <div class="contact-text-group">
                             <span class="title-zh">聯絡電話</span>
                             <span class="title-en">Phone</span>
-                            <span>037-683756</span>
+                            <span class="contact-content">037-683756</span>
                         </div>
                     </div>
 

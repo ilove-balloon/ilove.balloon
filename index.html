@@ -126,14 +126,14 @@
         .plan-list {
             display: flex;
             flex-direction: column;
-            gap: 20px; /* 每個方案的間距 */
+            gap: 20px;
         }
 
         .plan-item {
             background: #FFFFFF;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-            overflow: hidden; /* 隱藏溢出內容 */
+            overflow: hidden;
             transition: all 0.3s ease;
             border: 1px solid transparent;
         }
@@ -143,12 +143,11 @@
             box-shadow: 0 6px 20px rgba(0,0,0,0.06);
         }
 
-        /* 點擊展開後的樣式 */
         .plan-item.active {
             border: 1px solid var(--accent-color);
         }
 
-        /* 方案標題列 (點擊區域) */
+        /* 方案標題列 */
         .plan-header {
             padding: 25px 30px;
             display: flex;
@@ -179,17 +178,16 @@
             transition: transform 0.3s ease;
         }
 
-        /* 展開時箭頭旋轉 */
         .plan-item.active .toggle-icon {
             transform: rotate(180deg);
         }
 
-        /* 隱藏的內容區域 */
+        /* 內容區域 */
         .plan-content {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease-out;
-            background-color: #FCFAF9; /* 展開後的底色稍暗一點點 */
+            background-color: #FCFAF9;
         }
 
         .plan-content-inner {
@@ -197,7 +195,7 @@
             border-top: 1px dashed #EEE;
         }
 
-        /* 諮詢格式樣式 */
+        /* 諮詢格式樣式 (修正版) */
         .inquiry-box {
             background: #fff;
             padding: 20px;
@@ -210,12 +208,15 @@
             margin-bottom: 10px;
             font-size: 0.95rem;
             color: var(--secondary-text);
+            display: flex; /* 確保在同一行 */
+            align-items: center;
         }
+        
+        /* 針對標題文字修正：不換行 */
         .inquiry-item strong {
             color: var(--primary-text);
             margin-right: 10px;
-            display: inline-block;
-            width: 50px; /* 對齊標題 */
+            white-space: nowrap; /* 關鍵：強制文字不換行 */
         }
 
         .plan-btn {
@@ -358,7 +359,8 @@
         <div class="logo">i Love Balloon</div>
         <nav>
             <ul>
-                <li><a href="#price">方案</a></li> <li><a href="#rules">須知</a></li>
+                <li><a href="#price">方案</a></li>
+                <li><a href="#rules">須知</a></li>
                 <li><a href="#about">品牌</a></li>
                 <li><a href="#contact">聯絡</a></li>
             </ul>
@@ -383,10 +385,10 @@
                         <div class="plan-content-inner">
                             <p style="margin-bottom: 15px; color: var(--secondary-text);">如需諮詢此方案，請提供以下資訊：</p>
                             <div class="inquiry-box">
-                                <div class="inquiry-item"><strong>1.日期 :</strong> </div>
-                                <div class="inquiry-item"><strong>2.地點 :</strong> </div>
-                                <div class="inquiry-item"><strong>3.色系 :</strong> </div>
-                                <div class="inquiry-item"><strong>4.風格 :</strong> </div>
+                                <div class="inquiry-item"><strong>1.日期 :</strong></div>
+                                <div class="inquiry-item"><strong>2.地點 :</strong></div>
+                                <div class="inquiry-item"><strong>3.色系 :</strong></div>
+                                <div class="inquiry-item"><strong>4.風格 :</strong></div>
                             </div>
                             <a href="https://line.me/ti/p/@ilove79" target="_blank" class="plan-btn">
                                 點擊加入 LINE 諮詢
@@ -407,10 +409,10 @@
                         <div class="plan-content-inner">
                             <p style="margin-bottom: 15px; color: var(--secondary-text);">如需諮詢此方案，請提供以下資訊：</p>
                             <div class="inquiry-box">
-                                <div class="inquiry-item"><strong>1.日期 :</strong> </div>
-                                <div class="inquiry-item"><strong>2.地點 :</strong> </div>
-                                <div class="inquiry-item"><strong>3.色系 :</strong> </div>
-                                <div class="inquiry-item"><strong>4.風格 :</strong> </div>
+                                <div class="inquiry-item"><strong>1.日期 :</strong></div>
+                                <div class="inquiry-item"><strong>2.地點 :</strong></div>
+                                <div class="inquiry-item"><strong>3.色系 :</strong></div>
+                                <div class="inquiry-item"><strong>4.風格 :</strong></div>
                             </div>
                             <a href="https://line.me/ti/p/@ilove79" target="_blank" class="plan-btn">
                                 點擊加入 LINE 諮詢
@@ -431,10 +433,10 @@
                         <div class="plan-content-inner">
                             <p style="margin-bottom: 15px; color: var(--secondary-text);">如需諮詢此方案，請提供以下資訊：</p>
                             <div class="inquiry-box">
-                                <div class="inquiry-item"><strong>1.日期 :</strong> </div>
-                                <div class="inquiry-item"><strong>2.地點 :</strong> </div>
-                                <div class="inquiry-item"><strong>3.色系 :</strong> </div>
-                                <div class="inquiry-item"><strong>4.風格 :</strong> </div>
+                                <div class="inquiry-item"><strong>1.日期 :</strong></div>
+                                <div class="inquiry-item"><strong>2.地點 :</strong></div>
+                                <div class="inquiry-item"><strong>3.色系 :</strong></div>
+                                <div class="inquiry-item"><strong>4.風格 :</strong></div>
                             </div>
                             <a href="https://line.me/ti/p/@ilove79" target="_blank" class="plan-btn">
                                 點擊加入 LINE 諮詢
@@ -455,10 +457,10 @@
                         <div class="plan-content-inner">
                             <p style="margin-bottom: 15px; color: var(--secondary-text);">如需諮詢此方案，請提供以下資訊：</p>
                             <div class="inquiry-box">
-                                <div class="inquiry-item"><strong>1.日期 :</strong> </div>
-                                <div class="inquiry-item"><strong>2.地點 :</strong> </div>
-                                <div class="inquiry-item"><strong>3.色系 :</strong> </div>
-                                <div class="inquiry-item"><strong>4.風格 :</strong> </div>
+                                <div class="inquiry-item"><strong>1.日期 :</strong></div>
+                                <div class="inquiry-item"><strong>2.地點 :</strong></div>
+                                <div class="inquiry-item"><strong>3.色系 :</strong></div>
+                                <div class="inquiry-item"><strong>4.風格 :</strong></div>
                             </div>
                             <a href="https://line.me/ti/p/@ilove79" target="_blank" class="plan-btn">
                                 點擊加入 LINE 諮詢
@@ -558,17 +560,13 @@
     </footer>
 
     <script>
-        // 取得所有方案項目
         const plans = document.querySelectorAll('.plan-item');
 
         plans.forEach(plan => {
             const header = plan.querySelector('.plan-header');
             
             header.addEventListener('click', () => {
-                // 1. 切換自己的 active 狀態
                 plan.classList.toggle('active');
-
-                // 2. 控制內容的高度 (製作滑動動畫)
                 const content = plan.querySelector('.plan-content');
                 if (plan.classList.contains('active')) {
                     content.style.maxHeight = content.scrollHeight + "px";
